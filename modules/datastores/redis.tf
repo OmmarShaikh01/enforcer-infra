@@ -256,14 +256,14 @@ resource "kubernetes_stateful_set_v1" "enforcer-redis" {
               command = ["redis-cli", "-h", "localhost", "--user", "$REDIS_USERNAME", "info", "|", "grep", "loading", "|", "grep", "0"]
             }
             initial_delay_seconds = 60
-            failure_threshold = 4
+            failure_threshold     = 4
           }
           liveness_probe {
             exec {
               command = ["redis-cli", "-h", "localhost", "--user", "$REDIS_USERNAME", "info", "|", "grep", "loading", "|", "grep", "0"]
             }
             initial_delay_seconds = 60
-            failure_threshold = 4
+            failure_threshold     = 4
           }
           volume_mount {
             name       = "storage"

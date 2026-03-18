@@ -12,23 +12,9 @@ KUSTOMIZE ?= kustomize
 HELM      ?= helm
 
 # =====================================================================================================================
-# HELP
-# =====================================================================================================================
-.PHONY: help
-help: ## Show this help message
-	@echo ================================================================================
-	@echo Make Tasks
-	@echo ================================================================================
-	@grep -Eh '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-		sort -u | \
-		awk 'BEGIN {FS = ":.*?## "}; {printf ">>> %-32s %s\n", $$1, $$2}'
-	@echo ================================================================================
-
-
-# =====================================================================================================================
 # TERRAFORM
 # =====================================================================================================================
-.PHONY: tf-init  install-crd tf-destroy tf-apply tf-apply-replace tf-plan tf-dev-port
+.PHONY: tf-init tf-format install-crd tf-destroy tf-apply tf-apply-replace tf-plan tf-dev-port
 
 install-crd: ## Install CRDs
 	 $(KUBECTL) apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml
@@ -41,6 +27,10 @@ tf-init: install-crd ## Init Terraform
 	esac; \
 	cd $(ROOT_DIR)$$DIR; \
 	terraform init;
+
+tf-format: ## Format Terraform
+	cd $(ROOT_DIR); \
+	terraform fmt -recursive;
 
 tf-destroy: ## Destroy Terraform
 	@case $(ENV) in \

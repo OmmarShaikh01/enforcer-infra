@@ -314,7 +314,7 @@ resource "kubernetes_stateful_set_v1" "enforcer-postgres" {
               ]
             }
             initial_delay_seconds = 60
-            failure_threshold = 4
+            failure_threshold     = 4
           }
           liveness_probe {
             exec {
@@ -325,7 +325,7 @@ resource "kubernetes_stateful_set_v1" "enforcer-postgres" {
               ]
             }
             initial_delay_seconds = 90
-            failure_threshold = 4
+            failure_threshold     = 4
           }
 
           volume_mount {
