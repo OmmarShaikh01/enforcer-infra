@@ -1,0 +1,8 @@
+/environments/**/.terraform.lock.hcl
+/environments/**/.terraform/
+/environments/**/terraform.tfstate
+/environments/**/terraform.tfstate.backup
+/environments/**/.terraform.tfstate.lock.info
+/environments/**/environment.tfvars
+/environments/**/.tfplan
+/environments/**/.tfplan.json
